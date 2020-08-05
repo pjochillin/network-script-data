@@ -27,7 +27,7 @@ dragon_wings_end:
       - stop
     - flag player Dragon_Wings_Recover:<queue>
     - adjust <player> gravity:true
-    - while <player.has_flag[Dragon_Wings_Recover]> && <player.equipment_map.get[chestplate].script.name||null> == dragon_wings && !<player.has_flag[Dragon_Wings_Fly]>:
+    - while <player.has_flag[Dragon_Wings_Recover]> && <player.equipment_map.get[chestplate].scriptname||null> == dragon_wings && !<player.has_flag[Dragon_Wings_Fly]>:
       - if <player.equipment_map.get[chestplate].nbt[power]> >= 1 || <player.has_flag[Dragon_Wings_Fly]>:
         - flag player Dragon_Wings_Recover:!
         - stop
@@ -102,7 +102,7 @@ dragon_wings_events:
     on player starts sneaking:
       - if <player.is_flying>:
         - stop
-      - if <player.equipment_map.get[chestplate].script.name||null> == dragon_wings:
+      - if <player.equipment_map.get[chestplate].scriptname||null> == dragon_wings:
         - if !<script[dragon_wings_settings].data_key[settings.worlds].contains[<player.location.world.name>]>:
           - inject dragon_wings_toggle_glow
           - stop
@@ -127,7 +127,7 @@ dragon_wings_events:
     on player changes world from spawn flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
     on player damaged by FALL:
-      - if <player.equipment_map.get[chestplate].script.name||null> == dragon_wings:
+      - if <player.equipment_map.get[chestplate].scriptname||null> == dragon_wings:
         - determine cancelled
     on player quits flagged:Dragon_Wings_Recover:
       - flag player Dragon_Wings_Recover:!
