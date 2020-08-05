@@ -1,5 +1,5 @@
 drop_table_data:
-  type: yaml data
+  type: data
   worlds: mainland
   ## The Mobs Level
   mob_level:
@@ -83,7 +83,7 @@ drop_table:
     - define number <util.random.int[1].to[10000]>
     - foreach <script[drop_table_data].list_keys[mob_level.<[mob_level]>].numerical>:
       - if <[value]> >= <[number]>:
-        - define drop_data  <script[drop_table_data].yaml_key[mob_level.<[mob_level]>.<[value]>].random>
+        - define drop_data  <script[drop_table_data].data_key[mob_level.<[mob_level]>.<[value]>].random>
         - define drop <proc[get_random_soul].context[<[drop_data].before[/]>|<[drop_data].after[/]>]>
         - foreach stop
 
@@ -93,7 +93,7 @@ mob_death_event:
   whitelist: zombie|creeper|skeleton|spider|drowned|witch|husk|withers|evoker|ravager|pillager|vex|illusioner|silverfish|stray|vindicator|cave_spider|enderman
   events:
     on entity dies in:mainland:
-      - if <script[mob_death_event].yaml_key[whitelist].contains[<context.entity.entity_type>]>:
+      - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]>:
         - define mob_level <context.entity.custom_name.after[Level<&sp>].before[)]>
         - inject drop_table
         - if <[drop]||null> != null:

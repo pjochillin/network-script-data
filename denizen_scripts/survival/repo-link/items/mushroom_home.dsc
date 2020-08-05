@@ -13,7 +13,7 @@ miraculous_mushroom_events:
   type: world
   debug: false
   events:
-    on player right clicks with:mushroom_home bukkit_priority:HIGHEST:
+    on player right clicks block with:mushroom_home bukkit_priority:HIGHEST:
       - determine passively cancelled
       - if <context.relative||null> == null:
         - stop
@@ -22,7 +22,7 @@ miraculous_mushroom_events:
       - define top <cuboid[<yaml[mushroom_config].read[mushroom_relatives.cuboids.top.a].parsed>|<yaml[mushroom_config].read[mushroom_relatives.cuboids.top.b].parsed>]>
       - define stem <cuboid[<yaml[mushroom_config].read[mushroom_relatives.cuboids.stem.a].parsed>|<yaml[mushroom_config].read[mushroom_relatives.cuboids.stem.b].parsed>]>
       - if <[top].blocks.include[<[stem].blocks>].size> != <[top].blocks[air].include[<[stem].blocks[air]>].size>:
-        - narrate "<&c>Not enough room to place"
+        - narrate "<&c>Not enough room to place."
         - stop
       - if !<context.relative.below.material.is_solid>:
         - narrate "<&c>Unstable location."
@@ -41,7 +41,7 @@ miraculous_mushroom_events:
         - if <context.item.has_nbt[<[key]>]> && <context.item.nbt[<[key]>].as_list.size> > 0:
           - inventory set o:<context.item.nbt[<[key]>]> d:<yaml[mushroom_config].read[mushroom_relatives.saves.<[key]>].parsed.inventory>
     on player clicks lever:
-      - if <context.location.notable_name.starts_with[mushroom_home]||false>:
+      - if <context.location.note_name.starts_with[mushroom_home]||false>:
         - determine passively cancelled
       - wait 1t
       - if <context.location.notable_name.starts_with[mushroom_home~<player.uuid>]||false>:
@@ -68,7 +68,7 @@ miraculous_mushroom_events:
             - stop
         - foreach <yaml[mushroom_config].list_keys[mushroom_relatives.saves]> as:key:
           - define nbt:|:<[key]>/<yaml[mushroom_config].read[mushroom_relatives.saves.<[key]>].parsed.inventory.list_contents.escaped||air>
-        - note remove as:<context.location.notable_name>
+        - note remove as:<context.location.note_name>
         - define top <cuboid[<yaml[mushroom_config].read[mushroom_relatives.cuboids.top.a].parsed>|<yaml[mushroom_config].read[mushroom_relatives.cuboids.top.b].parsed>]>
         - define stem <cuboid[<yaml[mushroom_config].read[mushroom_relatives.cuboids.stem.a].parsed>|<yaml[mushroom_config].read[mushroom_relatives.cuboids.stem.b].parsed>]>
         - modifyblock <[stem].blocks[ladder]> air no_physics
