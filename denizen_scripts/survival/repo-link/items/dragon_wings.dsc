@@ -11,7 +11,7 @@ dragon_wings:
   display name: <&5>Dragon Wings
   lore:
     - "<&d>Power<&co> <&a>100<&pc>"
-    - "<&a>"
+    - <&a>
     - "<&6>Taken from the <&d>Ender Dragon<&6>!"
   mechanisms:
     nbt: power/1

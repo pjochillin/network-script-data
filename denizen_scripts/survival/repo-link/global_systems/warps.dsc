@@ -140,7 +140,7 @@ warps_my_warps_GUI_open:
       - define list:|:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
     - else:
       - define list:|:<[item].with[nbt=action/warp]>
-  - if <[list]||null> != null:
+  - if <[list].is_empty.not>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
@@ -206,12 +206,12 @@ favorite_warps:
     filler: white_stained_glass_pane[display_name=<&a>]
     back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [] [] [] [] [] [] [] [filler]"
-  - "[filler] [] [] [] [] [] [] [] [filler]"
-  - "[filler] [] [] [] [] [] [] [] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [] [] [] [] [] [] [] [filler]
+  - [filler] [] [] [] [] [] [] [] [filler]
+  - [filler] [] [] [] [] [] [] [] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
 
 favorite_warps_open:
   type: task
@@ -222,7 +222,7 @@ favorite_warps_open:
     - inject build_warp_item
     - define "list:|:<[item].with[display_name=<&e><[value]>;nbt=name/<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left Click to Warp.|<&c>Right Click to Remove]>]>"
   - define inventory <inventory[favorite_warps]>
-  - if <[list]||null> != null:
+  - if <[list].is_empty.not>
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
