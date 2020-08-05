@@ -8,7 +8,7 @@ define_curve1:
   - foreach <[a]> as:point:
     - define b:<element[1].add[<element[1].div[20].mul[<[loop_index].mul[<[increment]>].sub[20]>].power[2].mul[-1]>].mul[<[intensity]>]>
     - define offset:<proc[find_offset].context[<[b]>|<[angle]>]>
-    - define points:|:<[point].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+    - define points:|:<[point].up[<[offset].first>].right[<[offset].get[2]>]>
   - determine <[points]>
   
 define_curve2:
@@ -20,7 +20,7 @@ define_curve2:
   - foreach <[a]> as:point:
     - define b:<element[1].add[<element[1].div[20].mul[<[loop_index].mul[<[increment]>].sub[20]>].power[2].mul[-1]>].mul[<[intensity]>]>
     - define offset:<proc[find_offset].context[<[b]>|<[angle]>]>
-    - define points:|:<[point].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+    - define points:|:<[point].up[<[offset].first>].right[<[offset].get[2]>]>
   - determine <[points]>
   
 define_cone1:
@@ -34,7 +34,7 @@ define_cone1:
     - define between:<element[360].div[<[radius].mul[<util.pi>].mul[2].div[<[blocks_between]>]>]>
     - repeat <[cir].div[<[blocks_between]>].round>:
       - define offset:<proc[find_offset].context[<[radius]>|<[value].mul[<[between]>]>]>
-      - define points:|:<[point].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+      - define points:|:<[point].up[<[offset].first>].right[<[offset].get[2]>]>
   - determine <[points]>
 
 define_cone2:
@@ -49,7 +49,7 @@ define_cone2:
     - define layer:!
     - repeat <[cir].div[<[blocks_between]>].round>:
       - define offset:<proc[find_offset].context[<[radius]>|<[value].mul[<[between]>]>]>
-      - define layer:|:<[point].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+      - define layer:|:<[point].up[<[offset].first>].right[<[offset].get[2]>]>
     - define layers:|:<[layer].escaped>
   - determine <[layers]>
 
@@ -64,10 +64,10 @@ define_sphere1:
   - define between2:<element[360].div[<[radius].mul[<util.pi>].mul[2].div[<[blocks_between]>]>]>
   - repeat <[cir].div[<[blocks_between]>].round>:
     - define offset:<proc[find_offset].context[<[radius]>|<[value].mul[<[between]>].add[90]>]>
-    - if <[offset].get[1]> < 0:
-      - define A:<[offset].get[1].mul[-1]>
+    - if <[offset].first> < 0:
+      - define A:<[offset].first.mul[-1]>
     - else:
-      - define A:<[offset].get[1].mul[-1]>
+      - define A:<[offset].first.mul[-1]>
     - if <[offset].get[2]> < 0:
       - define B:<[offset].get[2].mul[-1]>
     - else:
@@ -75,7 +75,7 @@ define_sphere1:
     - define location2:<[location].above[<[A]>]>
     - repeat <[cir].div[<[blocks_between]>].round> as:value2:
       - define offset2:<proc[find_offset].context[<[B]>|<[value2].mul[<[between2]>]>]>
-      - define points:|:<[location2].up[<[offset2].get[1]>].right[<[offset2].get[2]>]>
+      - define points:|:<[location2].up[<[offset2].first>].right[<[offset2].get[2]>]>
   - determine <[points]>
 
 define_sphere2:
@@ -89,10 +89,10 @@ define_sphere2:
   - define between2:<element[360].div[<[radius].mul[<util.pi>].mul[2].div[<[blocks_between]>]>]>
   - repeat <[cir].div[<[blocks_between]>].round>:
     - define offset:<proc[find_offset].context[<[radius]>|<[value].mul[<[between]>].add[90]>]>
-    - if <[offset].get[1]> < 0:
-      - define A:<[offset].get[1].mul[-1]>
+    - if <[offset].first> < 0:
+      - define A:<[offset].first.mul[-1]>
     - else:
-      - define A:<[offset].get[1].mul[-1]>
+      - define A:<[offset].first.mul[-1]>
     - if <[offset].get[2]> < 0:
       - define B:<[offset].get[2].mul[-1]>
     - else:
@@ -101,7 +101,7 @@ define_sphere2:
     - define layer:!
     - repeat <[cir].div[<[blocks_between]>].round> as:value2:
       - define offset2:<proc[find_offset].context[<[B]>|<[value2].mul[<[between2]>]>]>
-      - define layer:|:<[location2].up[<[offset2].get[1]>].right[<[offset2].get[2]>]>
+      - define layer:|:<[location2].up[<[offset2].first>].right[<[offset2].get[2]>]>
     - define layers:|:<[layer].escaped>
   - determine <[layers]>
 
@@ -113,7 +113,7 @@ define_circle:
   - define between:<element[360].div[<[radius].mul[<util.pi>].mul[2].div[0.2]>]>
   - repeat <[cir].div[0.2].round>:
     - define offset:<proc[find_offset].context[<[radius]>|<[value].mul[<[between]>]>]>
-    - define points:|:<[location].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+    - define points:|:<[location].up[<[offset].first>].right[<[offset].get[2]>]>
   - determine <[points]>
 
 define_star2:
@@ -123,12 +123,12 @@ define_star2:
   - repeat <[num]>:
     - define t:<element[360].div[<[num]>].mul[<[num].div[2].round_down>]>
     - define offset:<proc[find_offset].context[<[radius]>|<[t].mul[<[value]>].add[<[rotation]>]>]>
-    - define points:|:<[location].up[<[offset].get[1]>].right[<[offset].get[2]>]>
-  - define distance:<[points].get[1].points_between[<[points].get[2]>].distance[0.2].size>
+    - define points:|:<[location].up[<[offset].first>].right[<[offset].get[2]>]>
+  - define distance:<[points].first.points_between[<[points].get[2]>].distance[0.2].size>
   - repeat <[distance]>:
     - define x:<[value]>
     - repeat <[num]>:
-      - define new_points:|:<[points].get[<[value]>].points_between[<[points].get[<[value].add[1]>]||<[points].get[1]>>].distance[0.4].get[<[x]>]>
+      - define new_points:|:<[points].get[<[value]>].points_between[<[points].get[<[value].add[1]>]||<[points].first>>].distance[0.4].get[<[x]>]>
   - determine <[new_points]>
 
 define_star:
@@ -138,9 +138,9 @@ define_star:
   - repeat <[num]>:
     - define t:<element[360].div[<[num]>].mul[<[num].div[2].round_down>]>
     - define offset:<proc[find_offset].context[<[radius]>|<[t].mul[<[value]>].add[<[rotation]>]>]>
-    - define points:|:<[location].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+    - define points:|:<[location].up[<[offset].first>].right[<[offset].get[2]>]>
   - repeat <[num]>:
-    - foreach <[points].get[<[value]>].points_between[<[points].get[<[value].add[1]>]||<[points].get[1]>>].distance[0.4]> as:point:
+    - foreach <[points].get[<[value]>].points_between[<[points].get[<[value].add[1]>]||<[points].first>>].distance[0.4]> as:point:
       - define new_points:|:<[point]>
   - determine <[new_points]>
 
@@ -153,7 +153,7 @@ define_spiral:
   - define between:<element[360].div[<[radius].mul[<util.pi>].mul[2].div[0.2]>]>
   - foreach <[start].points_between[<[end]>].distance[0.4]> as:point:
     - define offset:<proc[find_offset].context[<[radius]>|<[between].mul[<[loop_index]>].add[<[angle_offset]>]>]>
-    - define points:|:<[point].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+    - define points:|:<[point].up[<[offset].first>].right[<[offset].get[2]>]>
   - determine <[points]>
 
 define_zigzag:
@@ -170,7 +170,7 @@ define_zigzag:
       - while stop
     - else:
       - define offset:<proc[find_offset].context[<[radius]>|<util.random.int[0].to[360]>]>
-      - define new_point:<[new_point].up[<[offset].get[1]>].right[<[offset].get[2]>]>
+      - define new_point:<[new_point].up[<[offset].first>].right[<[offset].get[2]>]>
       - define points:|:<[current].points_between[<[new_point]>].distance[0.4]>
     - define current:<[new_point]>
   - determine <[points]>
@@ -180,12 +180,12 @@ cosmetic_command:
   name: cosmetic
   tab complete:
   - if <context.raw_args.split[].count[<&sp>]> == 0:
-    - determine <list[curve1|sphere2].filter[starts_with[<context.args.get[1]||>]]>
+    - determine <list[curve1|sphere2].filter[starts_with[<context.args.first||>]]>
   - else:
     - determine <list>
   script:
   - if <player.has_flag[cosmetic]>:
-    - if <context.args.get[1]> == sphere2:
+    - if <context.args.first> == sphere2:
       - define layers:<proc[define_sphere2].context[<player.location.above>|1.5|0.3]>
       - define center:<player.location>
       - flag player sphere2:true
@@ -202,7 +202,7 @@ cosmetic_command:
           - define points:|:<[layers].get[<[layers].size.sub[<[value]>]>].unescaped>
           - playeffect redstone at:<[points].parse[add[<[offset]>].with_world[<player.location.world>]]> quantity:1 offset:0 visibility:100 special_data:1|<co@91,225,245>
           - wait 1t
-    - else if <context.args.get[1]> == curve1:
+    - else if <context.args.first> == curve1:
       - define sphere:<proc[define_sphere1].context[<player.location>|1.5|1]>
       - define center:<player.location>
       - if <player.has_flag[curve]>:
@@ -236,7 +236,7 @@ test_effects_command:
   name: test_effects
   tab complete:
   - if <context.raw_args.split[].count[<&sp>]> == 0:
-    - determine <list[curve1|curve2|star1|star2|circle|spiral|zigzag|sphere1|sphere2].filter[starts_with[<context.args.get[1]>]]||<list[curve|star1|star2|circle|spiral|zigzag|sphere1|sphere2]>>
+    - determine <list[curve1|curve2|star1|star2|circle|spiral|zigzag|sphere1|sphere2].filter[starts_with[<context.args.first>]]||<list[curve|star1|star2|circle|spiral|zigzag|sphere1|sphere2]>>
   - else if <context.raw_args.split[].count[<&sp>]> == 1:
     - determine <server.particle_types.parse[to_lowercase].filter[starts_with[<context.args.get[2]||<server.particle_types>>]]>
   script:

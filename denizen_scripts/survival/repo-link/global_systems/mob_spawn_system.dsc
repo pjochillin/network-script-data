@@ -27,7 +27,7 @@ mob_spawning_system_events:
     on entity spawns in:mainland:
       - if <script[mob_spawning_system_events].data_key[settings.blacklist].contains[<context.entity.entity_type>]>:
         - stop
-      - if <context.entity.script.name||null> == null:
+      - if <context.entity.script.name||null> == null && !<context.entity.is_mythicmob>:
         - determine passively cancelled
       - else:
         - stop
@@ -45,6 +45,6 @@ mob_spawning_system_events:
       - foreach <script[custom_<[mob_type]>].list_keys[custom.scaling_values]||<list>>:
         - define base <script[custom_<[mob_type]>].data_key[custom.scaling_values.<[value]>.base]||<context.entity.attribute_value[<[value]>]>>
         - narrate <[base]>
-        - define attributes_built:|:<[value]>/<script[custom_<[mob_type]>].data_key[custom.scaling_values.<[value]>.scaling_formula].parsed>
+        - define attributes_built:|:<[value]>/<script[custom_<[mob_type]>].parsed_key[custom.scaling_values.<[value]>.scaling_formula]>
       - if <[attributes_built]||null> != null:
         - adjust <entry[mob].spawned_entity> attributes:<[attributes_built]>

@@ -23,11 +23,11 @@ grappling_hook_events:
       - shoot arrow shooter:<player> speed:3 script:grappling_hook_pull save:hook
       - flag player grappling:true duration:10s
       - wait 1t
-      - flag <entry[hook].shot_entities.get[1]> no_trail:true duration:30s
+      - flag <entry[hook].shot_entities.first> no_trail:true duration:30s
       - repeat 999:
-        - if !<entry[hook].shot_entities.get[1].is_spawned> || !<player.has_flag[grappling]>:
+        - if !<entry[hook].shot_entities.first.is_spawned> || !<player.has_flag[grappling]>:
           - stop
-        - playeffect redstone at:<player.location.points_between[<entry[hook].shot_entities.get[1].location>].distance[0.5]> quantity:5 special_data:1|gray offset:0.1
+        - playeffect redstone at:<player.location.points_between[<entry[hook].shot_entities.first.location>].distance[0.5]> quantity:5 special_data:1|gray offset:0.1
         - wait 2t
     on player shoots block flagged:grappling bukkit_priority:LOWEST:
       - flag player grappling:<context.location.add[<context.hit_face>].center>

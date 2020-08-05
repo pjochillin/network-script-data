@@ -27,13 +27,13 @@ dragon_wings_end:
       - stop
     - flag player Dragon_Wings_Recover:<queue>
     - adjust <player> gravity:true
-    - while <player.has_flag[Dragon_Wings_Recover]> && <player.equipment.get[3].script.name||null> == dragon_wings && !<player.has_flag[Dragon_Wings_Fly]>:
-      - if <player.equipment.get[3].nbt[power]> >= 1 || <player.has_flag[Dragon_Wings_Fly]>:
+    - while <player.has_flag[Dragon_Wings_Recover]> && <player.equipment_map.get[chestplate].script.name||null> == dragon_wings && !<player.has_flag[Dragon_Wings_Fly]>:
+      - if <player.equipment_map.get[chestplate].nbt[power]> >= 1 || <player.has_flag[Dragon_Wings_Fly]>:
         - flag player Dragon_Wings_Recover:!
         - stop
-      - inventory adjust slot:39 nbt:power/<player.equipment.get[3].nbt[power].add[0.01]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment.get[3].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment.get[3].nbt[power].mul[100]><&b><&pc>].include[<player.equipment.get[3].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment.get[3].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment.get[3].nbt[power].mul[100]><&b><&pc>"
+      - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].add[0.01]>
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
       - wait 10t
 
 
@@ -48,10 +48,10 @@ dragon_wings_liftoff:
       - adjust <player> gravity:false
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:0,0.5,0
-      - inventory adjust slot:39 nbt:power/<player.equipment.get[3].nbt[power].sub[0.01]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment.get[3].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment.get[3].nbt[power].mul[100]><&b><&pc>].include[<player.equipment.get[3].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment.get[3].nbt[power].mul[3].round_up>]><player.equipment.get[3].nbt[power].mul[100]><&b><&pc>"
-      - if <player.equipment.get[3].nbt[power]> <= 0:
+      - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.01]>
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
+      - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
         - inject dragon_wings_end
       - repeat 5:
         - playeffect dragon_breath at:<player.eye_location.below[0.4].backward[0.4].left[0.25]> offset:0.25 quantity:15 targets:<player.location.world.players>
@@ -70,10 +70,10 @@ dragon_wings_boost:
   script:
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:<player.location.direction.vector.mul[2]>
-      - inventory adjust slot:39 nbt:power/<player.equipment.get[3].nbt[power].sub[0.02]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment.get[3].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment.get[3].nbt[power].div[100]><&b><&pc>].include[<player.equipment.get[3].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment.get[3].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment.get[3].nbt[power].div[100]><&b><&pc>"
-      - if <player.equipment.get[3].nbt[power]> <= 0:
+      - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.02]>
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].div[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].div[100]><&b><&pc>"
+      - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
         - inject dragon_wings_end
       - repeat 10:
         - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.location.world.players>
@@ -102,11 +102,11 @@ dragon_wings_events:
     on player starts sneaking:
       - if <player.is_flying>:
         - stop
-      - if <player.equipment.get[3].script.name||null> == dragon_wings:
+      - if <player.equipment_map.get[chestplate].script.name||null> == dragon_wings:
         - if !<script[dragon_wings_settings].data_key[settings.worlds].contains[<player.location.world.name>]>:
           - inject dragon_wings_toggle_glow
           - stop
-        - if <player.equipment.get[3].nbt[power]> <= 0:
+        - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
           - inject dragon_wings_end
           - stop
         - if <player.has_flag[Dragon_Wings_Recover]>:
@@ -127,7 +127,7 @@ dragon_wings_events:
     on player changes world from spawn flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
     on player damaged by FALL:
-      - if <player.equipment.get[3].script.name||null> == dragon_wings:
+      - if <player.equipment_map.get[chestplate].script.name||null> == dragon_wings:
         - determine cancelled
     on player quits flagged:Dragon_Wings_Recover:
       - flag player Dragon_Wings_Recover:!
