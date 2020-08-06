@@ -74,6 +74,8 @@ Player_Verification:
         - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
         - stop
     script:
+        - if <[User].length> < 4:
+            - inject locally ErrorProcess
         - else if <server.match_player[<[User]>]||null> == null:
             - inject locally ErrorProcess
         - define User <server.match_player[<[User]>]>
@@ -90,6 +92,8 @@ Player_Verification_Offline:
         - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
         - stop
     script:
+        - if <[User].length> < 4:
+            - inject locally ErrorProcess
         - else if <server.match_player[<[User]>]||null> == null:
             - if <server.match_offline_player[<[User]>]||null> == null:
                 - inject locally ErrorProcess
@@ -105,6 +109,8 @@ Player_Verification_Offline_NullReturn:
     type: task
     debug: false
     script:
+        - if <[User].length> < 4:
+            - define User null
         - else if <server.match_player[<[User]>]||null> == null:
             - define User <server.match_offline_player[<[User]>]||null>
         - else:
@@ -161,7 +167,7 @@ Online_Player_Tabcomplete:
     debug: false
     definitions: iArg|Blacklist
     script:
-        - if <[iArg]||null> == null:
+        - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
             - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
@@ -196,7 +202,7 @@ All_Player_Tabcomplete:
     debug: false
     definitions: iArg|Blacklist
     script:
-        - if <[iArg]||null> == null:
+        - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
             - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
@@ -219,7 +225,7 @@ OneArg_Command_Tabcomplete:
     debug: false
     definitions: iArg|Args
     script:
-        - if <[iArg]||null> == null:
+        - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
             - determine <[Args]>
@@ -314,15 +320,15 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                 #@ Player is typing a current arg
                 - if !<context.raw_args.ends_with[<&sp>]>:
                     #@ TabCompleting Arg#
-                    - if <[Arg<[Loop_Index]>]||null> != null:
+                    - if <[Arg<[Loop_Index]>].exists>:
                         - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
                     #@ TabCompleting Arg#ArgArgs
                     - repeat <[ArgSize]>:
                         - define ArgRef <[ArgSize].sub[<[Value]>]>
-                        - if <[Arg<[ArgRef]>]||null> != null:
+                        - if <[Arg<[ArgRef]>].exists>:
                             - if <[Arg<[ArgRef]>].contains[<context.args.get[<[ArgRef]>]>]>:
                                 - define Option <context.args.get[<[ArgRef]>]>
-                                - if <[Arg<[loop_index]><[Option]>Args]||null> != null:
+                                - if <[Arg<[loop_index]><[Option]>Args].exists>:
                                     - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
                                     
                 #@ Player is typing a new arg - check for Arg#
@@ -335,14 +341,14 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                         - define i1 <[Value]>
                         #@ Check for previous Arg#
                         - define ArgRef <[ArgSize].add[1].sub[<[i1]>]>
-                        - if <[Arg<[i1]>]||null> != null:
+                        - if <[Arg<[i1]>].exists>:
                             - repeat <[ArgRef].add[1]>:
                                 - define i2 <[Value]>
                                 - if <context.args.size.add[1]> != <[i2]>:
                                     - repeat next
                                 - define iArg <context.args.get[<[ArgSize].add[1].sub[<[i2]>]>]>
                                 - if <[Arg<[i1]>].contains[<[iArg]>]>:
-                                    - if <[Arg<[ArgSize].add[1]><[iArg]>Args]||null> != null:
+                                    - if <[Arg<[ArgSize].add[1]><[iArg]>Args].exists>:
                                         - determine <[Arg<[ArgSize].add[1]><[iArg]>Args]>
             #@ Skip to next index
             - else:

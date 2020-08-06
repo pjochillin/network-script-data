@@ -9,14 +9,14 @@ MsgHover:
     type: procedure
     debug: false
     definitions: Hover|Text
-    #description: Creates text with a hover message.
+    description: Creates text with a hover message.
     script:
         - determine <&hover[<[Hover].unescaped>]><[Text].unescaped><&end_hover>
 HoverMsg:
     type: procedure
     debug: false
     definitions: Hover|Text
-    #description: Creates text with a hover message.
+    description: Creates text with a hover message.
     script:
         - determine <&hover[<[Hover].unescaped>]><[Text].unescaped><&end_hover>
 
@@ -31,7 +31,7 @@ MsgCmd:
     type: procedure
     debug: false
     definitions: Hover|Text|Command
-    #description: Creates text with a hover message that runs a message when clicked.
+    description: Creates text with a hover message that runs a message when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>]><[Text].unescaped><&end_click><&end_hover>
 
@@ -46,7 +46,7 @@ MsgChat:
     type: procedure
     debug: false
     definitions: Hover|Text|Chat
-    #description: Creates text with a hover message that makes you say a message when clicked.
+    description: Creates text with a hover message that makes you say a message when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[<[Command]>]><[Text].unescaped><&end_click><&end_hover>
 
@@ -61,7 +61,7 @@ CmdHint:
     type: procedure
     debug: false
     definitions: Hover|Text|Command
-    #description: Creates text with a hover message that makes you pre-type a command when clicked.
+    description: Creates text with a hover message that makes you pre-type a command when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><[Text].unescaped><&end_click><&end_hover>
 
@@ -76,7 +76,7 @@ MsgHint:
     type: procedure
     debug: false
     definitions: Hover|Text|Command
-    #description: Creates text with a hover message that makes you pre-type a message when clicked.
+    description: Creates text with a hover message that makes you pre-type a message when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><[Text].unescaped><&end_click><&end_hover>
 
@@ -91,7 +91,7 @@ MsgURL:
     type: procedure
     debug: false
     definitions: Hover|Text|URL
-    #description: Creates text with a hover message that makes you opt to copy a URL for a link.
+    description: Creates text with a hover message that makes you opt to copy a URL for a link.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[<[URL]>].type[OPEN_URL]><[Text].unescaped><&end_click><&end_hover>
 
@@ -111,7 +111,7 @@ MsgHoverIns:
     type: procedure
     debug: false
     definitions: Hover|Text|Insert
-    #description: Creates text with a hover message that you can shift+click to insert text anywhere into chat.
+    description: Creates text with a hover message that you can shift+click to insert text anywhere into chat.
     script:
         - determine <&hover[<[Hover]>]><&insertion[<[Insert]>]><[Text]><&end_insertion><&end_hover>
 
@@ -127,7 +127,7 @@ MsgCmdIns:
     type: procedure
     debug: false
     definitions: Hover|Text|Command|Insert
-    #description: Creates text with a hover message that you can shift+click to insert text anywhere into chat, or click runs a command when clicked.
+    description: Creates text with a hover message that you can shift+click to insert text anywhere into chat, or click runs a command when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
 
@@ -143,7 +143,7 @@ MsgCmdHintIns:
     type: procedure
     debug: false
     definitions: Hover|Text|Command|Insert
-    #description: Creates text with a hover message that you can shift+click to insert text anywhere into chat, or click and it makes you pre-type a command when clicked.
+    description: Creates text with a hover message that you can shift+click to insert text anywhere into chat, or click and it makes you pre-type a command when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
 
@@ -159,7 +159,7 @@ MsgChatHintIns:
     type: procedure
     debug: false
     definitions: Hover|Text|Command|Insert
-    #description: Creates text with a hover message that you can shift+click to insert text anywhere into chat, or click and it makes you pre-type a message when clicked.
+    description: Creates text with a hover message that you can shift+click to insert text anywhere into chat, or click and it makes you pre-type a message when clicked.
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
 
