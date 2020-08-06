@@ -122,11 +122,12 @@ Error_Handler:
     - debug record start
   script:
     - ~debug record submit save:mylog
+    - define WeirdList <list>
     - foreach Name|UUID|Server as:Tag:
-      - if <[Tag]||false>:
+      - if <[<[Tag]>]||invalid> == invalid:
         - foreach next
       - else:
-        - if <[Tag]> != null:
+        - if <[<[Tag]>]> == null:
           - foreach next
       - define WeirdList:->:<[Tag]>
     - if <[WeirdList].is_empty>:
