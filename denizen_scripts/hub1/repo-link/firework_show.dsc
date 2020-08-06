@@ -3,7 +3,7 @@ firework_show:
   name: firework_show
   description: Launches a firework show.
   usage: /firework_show
-  permission: not.a.perm
+  permission: adriftus.admin
   script:
     - define locations <player.location.find.surface_blocks.within[15].parse[above]>
     - define colors <list[red|blue|green|yellow|purple|orange]>
