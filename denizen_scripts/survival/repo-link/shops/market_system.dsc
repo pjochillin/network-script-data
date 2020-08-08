@@ -306,7 +306,7 @@ market_system_category_events:
 
 
 #---------------#
-# - FUNCTIONS - # 
+# - FUNCTIONS - #
 #---------------#
 market_system_category_setup:
   type: task
