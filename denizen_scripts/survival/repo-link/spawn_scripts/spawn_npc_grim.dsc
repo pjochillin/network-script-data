@@ -77,7 +77,7 @@ grim_steal_prevention:
             - narrate "<&c>You do not have a death location for me to show you."
             - inventory close
           - else:
-            - narrate "<&a>Your death location is <player.flag[player_death_location].as_location.simple.formatted||not<&sp>set>"
+            - narrate "<&a>Your death location is <player.flag[player_death_location].as_location.simple.formatted||not set>"
             - inventory close
             - teleport <player> <player.flag[player_death_location].as_location.up[2]>
             - adjust <player> gamemode:spectator
