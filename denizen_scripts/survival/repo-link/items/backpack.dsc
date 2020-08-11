@@ -86,7 +86,7 @@ Backpack_events:
     on player clicks Backpack_* in Backpack_inventory_*:
       - determine cancelled
     on player clicks in Backpack_inventory_*:
-      - if <player.inventory.slot[<context.hotbar_button>].script.name.starts_with[Backpack_]||false>
+      - if <player.inventory.slot[<context.hotbar_button>].scriptname.starts_with[Backpack_]||false>
         - determine cancelled
 
 Backpack_inventory_9:
@@ -128,7 +128,7 @@ Backpack_inventory_54:
 Backpack_save:
   type: task
   script:
-    - if <player.item_in_hand.script.name.starts_with[Backpack]||false>:
+    - if <player.item_in_hand.scriptname.starts_with[Backpack]||false>:
       - define slot <player.held_item_slot>
     - else:
       - define slot 41
@@ -137,7 +137,7 @@ Backpack_save:
 Backpack_open:
   type: task
   script:
-    - if <player.item_in_hand.script.name.starts_with[Backpack]||false>:
+    - if <player.item_in_hand.scriptname.starts_with[Backpack]||false>:
       - define item <player.item_in_hand>
     - else:
       - define item <player.item_in_offhand>
