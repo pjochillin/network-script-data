@@ -443,7 +443,7 @@ Meeseeks_Shop:
                                     - narrate format:Colorize_Yellow "New shop items found! Shop closed until price verified."
                                     - flag npc ShopOpen:!
                         - flag server Meeseeks.LockedChests:<[LockedChests]>
-                        - run Meeseeks_Shop def:<list_single[menu/Meeseeks_Shop|action/KeyBox|npc/<npc>]>
+                        - run Meeseeks_Shop def:<list_single[<list[menu/Meeseeks_Shop|action/KeyBox|npc/<npc>]>]>
             - case PreviewClick ShopClick:
                 - if <npc.owner> != <player>:
                     - choose <[Click]>:
@@ -461,7 +461,7 @@ Meeseeks_Shop:
                 # @ ██ [ Check Player Coins ] ██
                     - if <player.money> < <[StackQuantity].mul[<[Price]>]>:
                     #- if <player.flag[Behrry.Economy.Coins]> < <[StackQuantity].mul[<[Price]>]>:
-                        - narrate format:Colorize_Red "Not enough coins."
+                        - narrate format:Colorize_Red "Not enough coin."
                         - stop
 
                 # @ ██ [ Check Player Space ] ██
