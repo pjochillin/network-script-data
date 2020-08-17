@@ -1241,9 +1241,6 @@ claiming_system_upgrade_events:
   debug: false
   events:
     on player enters claim*:
-    # $ ---- Debugging ------------------------ #
-    - inject player_enters_area_debugging.wrapper
-    # $ ---- ---------------------------------- #
     - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
     - if <player.flag[claim_enter_ignore]||null> == <[group]>:
       - flag player claim_enter_ignore:!
@@ -1257,12 +1254,7 @@ claiming_system_upgrade_events:
             - inject claim_system_apply_upgrade_fly
             - foreach next
         - inject claim_system_apply_upgrade_<[upgrade_name]>
-    on player exits cuboid:
-    # $ ---- Debugging ------------------------ #
-    - inject player_enters_area_debugging.wrapper
-    # $ ---- ---------------------------------- #
-    - if <context.cuboids.filter[note_name.starts_with[claim]].is_empty>:
-      - stop
+    on player exits claim*:
     - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note.after[.].before[/]].first>
     - flag player claim_enter_ignore:<[group]> duration:6t
     - wait 2t
@@ -1337,16 +1329,10 @@ claiming_system_bossbar_initialize:
     - inject claiming_system_bossBar_Stop
     
     on player enters savage_lands_cuboids:
-    # $ ---- Debugging ------------------------ #
-    - inject player_enters_area_debugging.wrapper
-    # $ ---- ---------------------------------- #
     - wait 5t
     - inject claiming_system_bossBar_Stop
     
     on player exits savage_lands_cuboids:
-    # $ ---- Debugging ------------------------ #
-    - inject player_enters_area_debugging.wrapper
-    # $ ---- ---------------------------------- #
     - wait 5t
     - inject claiming_system_bossBar_Stop
 
