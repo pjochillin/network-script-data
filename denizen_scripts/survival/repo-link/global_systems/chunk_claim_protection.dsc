@@ -1257,7 +1257,7 @@ claiming_system_upgrade_events:
             - inject claim_system_apply_upgrade_fly
             - foreach next
         - inject claim_system_apply_upgrade_<[upgrade_name]>
-    on player exits area:
+    on player exits cuboid:
     # $ ---- Debugging ------------------------ #
     - inject player_enters_area_debugging.wrapper
     # $ ---- ---------------------------------- #
