@@ -10,5 +10,4 @@ custom_grass_bonemeal_handler:
                         - modifyblock <[value].above[1]> grass no_physics
                     - case 4 5 6 7 8 9:
                         - modifyblock <[value]> grass no_physics
-        on player steps on water in:End_dimension:
-        - hurt 4
+        
