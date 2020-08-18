@@ -65,9 +65,8 @@ dragon_prespawn_handler:
             - actionbar <&a><player.flag[green_crystal_gas]><&pc>
             - wait 4t
         - if <player.flag[green_crystal_gas]> == 100:
-            - while <player.flag[green_crystal_gas]> == 100:
+            - while <player.flag[green_crystal_gas]> == 100 && <player.has_flag[temptations_defeat].not>:
                 # insert stuff here for full gas meter
-                # check for temptations defeat debuff
                 - hurt 2
                 - wait 1s
         on player exits green_crystal_area:
@@ -78,8 +77,35 @@ dragon_prespawn_handler:
         on custom_crystal_yellow damaged by player priority:-5:
         - if <context.projectile.entity_type||null> != SPECTRAL_ARROW || <server.has_flag[yellow_crystal].not>:
             - determine 0
-        
 
+        on player damaged by dragon_purple_fire:
+        - hurt <player.health.mul[0.75]>
+        # mark stare into the void debuff
+        - flag player stare_into_the_void
+
+        on player damaged by dragon_green_fire:
+        # - flag player temptations_benefit
+
+        
+        on player damaged by dragon_golden_fire:
+        - flag player spectral_teleport_loc:<player.location>
+        - teleport <location[dragon_spectral_plane]>
+        - narrate "<&a>In order to return to the battle, you must kill 10 mobs"
+        - flag player spectral_mobs:0
+        
+        on entity death in:spectral_plane:
+        - flag player spectral_mobs:++
+        - if <player.flag[spectral_mobs]> == 10:
+            - teleport <player.flag[spectral_teleport_loc].as_location>
+            - narrate "<&a>You have returned to the fight!"
+            - flag player spectral_mobs:!
+            - flag player spectral_teleport_loc:!
+        
+        on player damaged by dragon_red_fire:
+        - while <server.has_flag[red_crystal]>:
+            - burn <player> duration:2s
+            - wait 1s
+        
 dragon_crystal_data:
     type: data
     green:
@@ -94,6 +120,23 @@ dragon_crystal_data:
     yellow:
         location: <location[yellow_crystal]>
     
+
+
+dragon_purple_fire:
+    type: entity
+    entity_type: ender_dragon
+
+dragon_red_fire:
+    type: entity
+    entity_type: ender_dragon
+
+dragon_golden_fire:
+    type: entity
+    entity_type: ender_dragon
+
+dragon_green_fire:
+    type: entity
+    entity_type: ender_dragon
 
 custom_crystal_purple:
     type: entity

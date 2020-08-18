@@ -35,6 +35,8 @@ Message_Handler:
     # % ██ [ Command  Based Scripts          ] ██
       - if <[Message].starts_with[/]>:
         - choose <[Message].before[<&sp>].after[/]>:
+          - case restart:
+            - ~Run Restart_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case reload:
             - ~Run Reload_Scripts_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case tag parse t:
