@@ -1,13 +1,10 @@
 Repository_DCommand:
     type: task
-    PermissionRoles:
-    - Everyone
-    definitions: Message|Channel|Author|Group
+    definitions: Channel
     debug: false
     Context: Color
     script:
 # - ██ [ Clean Definitions & Inject Dependencies ] ██
-    # - inject Role_Verification
     - define color Code
     - inject Embedded_Color_Formatting
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
