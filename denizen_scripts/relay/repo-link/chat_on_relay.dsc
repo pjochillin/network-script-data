@@ -2,7 +2,7 @@
 chat_send_message:
   type: task
   debug: false
-  definitions: game_channel|display_name|game_message|server|name
+  definitions: game_message|game_channel|server|name|display_name
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
       - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
