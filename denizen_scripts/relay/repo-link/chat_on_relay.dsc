@@ -10,8 +10,6 @@ chat_send_message:
       - define headers <list[User-Agent/Behr|Content-Type/application/json]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
-
-
 discord_watcher:
   type: world
   debug: false
