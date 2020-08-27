@@ -485,7 +485,7 @@ teleporthere_global_command:
                 - foreach <[player_arg].split[,]> as:user:
                     - inject player_verification
                     - define player_list:->:<[user]>
-                - run multiple_teleporthere_request def:<[player_list]>|<player>
+                    - run multiple_teleporthere_request def:<list_single[<[player_list]>].include[<player>]>
             - else:
                 - define player_1 <server.match_player[<[Args].first>]||null>
                 - if <[player_1]> == null || <[player_1].uuid> == <player.uuid>:
