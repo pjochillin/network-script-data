@@ -563,7 +563,7 @@ teleporthere_global_command:
                 - if <entry[player_map_2].result.is_empty> || <entry[player_map_2].result.first.get[uuid]> == <player.uuid>:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - bungeerun hub1 networkteleporthere_request def:<entry[player_map_2].result.first>|<entry[player_map_1].result.first>
+                - bungeerun hub1 networkteleporthere_request def:<list_single[<entry[player_map_2].result.first>].include_single[<entry[player_map_1].result.first>]>
 
 teleport_global_command:
     type: command
