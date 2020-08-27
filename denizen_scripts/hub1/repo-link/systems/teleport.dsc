@@ -546,7 +546,7 @@ teleporthere_global_command:
         - else:
             - if <list[everyone|all].contains[<context.args.first>]>:
                 - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_2
-                - bungeerun hub1 everyone_networkteleporthere_request def:<entry[player_map_2].result.first>|<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>
+                - bungeerun hub1 everyone_networkteleporthere_request def:<list_single[<entry[player_map_2].result.first>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
             - else if <context.args.first.contains[,]>:
                 - define player_arg <context.args.first>
                 - repeat <[player_arg].to_list.count[,].add[1]>:
