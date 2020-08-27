@@ -515,7 +515,7 @@ teleporthere_global_command:
                         - inject Command_Error
                     - define uuid_list:->:<entry[network_player].result.first.get[uuid]>
                     - define player_arg <[player_arg].after[,]>
-                - bungeerun hub1 multiple_networkteleporthere_request def:<[uuid_list]>|<player>|<player.display_name>
+                - bungeerun hub1 multiple_networkteleporthere_request def:<list_single[<[uuid_list]>].include_single[<player>|<player.display_name>]>
             - else:
                 - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_1
                 - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_2
