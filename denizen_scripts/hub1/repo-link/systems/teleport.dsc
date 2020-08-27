@@ -411,7 +411,7 @@ networkteleport_accept:
         - bungeerun <[attached_server]> networkteleport_timeout_accept def:<[player_1_map]>|<[attached_player]>|<[attached_server]>
     - else if <yaml[networkteleporthere_requests].contains[<[attached_player].uuid>]> && <yaml[networkteleporthere_requests].read[<[attached_player].uuid>].contains[<[player_1_map].get[uuid]>]>:
         - yaml set id:networkteleporthere_requests <[attached_player].uuid>:<-:<[player_1_map].get[uuid]>
-        - bungeerun <[player_1_map].get[server]> networkteleporthere_timeout_accept def:<[player_1_map]>|<[attached_player]>|<[attached_server]>
+        - bungeerun <[player_1_map].get[server]> networkteleporthere_timeout_accept def:<list_single[<[player_1_map]>].include[<[attached_player]>|<[attached_server]>]>
     - else:
         - bungee <[attached_server]>:
             - adjust <queue> linked_player:<[attached_player]>
