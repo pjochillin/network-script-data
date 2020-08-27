@@ -422,11 +422,7 @@ networkteleport_accept:
             - inject Command_Error_Bungee
 
 teleporthere_global_command:
-    type: command
     name: teleporthere
-    usage: /teleporthere (<&lt>Player<&gt>(,...)/(everyone/all)) (-r/-request/request) (-l/-local/-locally/-s/-server)
-    aliases:
-    - tphere
     - ntph
     - tph
     - networktphere
