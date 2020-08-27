@@ -732,7 +732,7 @@ teleport_global_command:
         - else:
             - if <list[everyone|all].contains[<context.args.first>]>:
                 - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_2
-                - bungeerun hub1 everyone_networkteleport_request def:<entry[player_map_2].result.first>|<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>
+                - bungeerun hub1 everyone_networkteleport_request def:<list_single[<entry[player_map_2].result.first>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
             - else:
                 - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_1
                 - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_2
