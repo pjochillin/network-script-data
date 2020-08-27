@@ -26,12 +26,9 @@ teleport_cancel_global_command:
             - narrate "<&a>You have cancelled all outgoing teleport requests."
         - else if <context.args.first.contains[,]>:
             - define player_arg <context.args.first>
-            - repeat <[player_arg].to_list.count[,].add[1]>:
-                - if <server.match_player[<[player_arg].before[,]>]||null> == null || <server.match_player[<[player_arg].before[,]>].uuid> == <player.uuid>:
-                    - define Reason "At least one of the specified players is invalid."
-                    - inject Command_Error
-                - define player_list:->:<server.match_player[<[player_arg].before[,]>]>
-                - define player_arg <[player_arg].after[,]>
+            - foreach <[player_arg].split[,]> as:user:
+                - inject player_verification
+                - define player_list:->:<[user]>
             - define uuid_list <yaml[teleport_requests].read[<player.uuid>].filter_tag[<[player_arg].parse[uuid].contains[<[filter_value]>]>]||<list>>
             - define uuid_here_list <yaml[teleporthere_requests].read[].filter[values.contains[<player.uuid>]].parse[keys.first].filter_tag[<[player_arg].parse[uuid].contains[<[filter_value]>]>]>
             - if <[uuid_list].is_empty> && <[uuid_here_list].is_empty>:
@@ -177,12 +174,9 @@ teleport_deny_global_command:
             - narrate "<&a>You have declined all teleport requests."
         - else if <context.args.first.contains[,]>:
             - define player_arg <context.args.first>
-            - repeat <[player_arg].to_list.count[,].add[1]>:
-                - if <server.match_player[<[player_arg].before[,]>]||null> == null || <server.match_player[<[player_arg].before[,]>].uuid> == <player.uuid>:
-                    - define Reason "At least one of the specified players is invalid."
-                    - inject Command_Error
-                - define player_list:->:<server.match_player[<[player_arg].before[,]>]>
-                - define player_arg <[player_arg].after[,]>
+            - foreach <[player_arg].split[,]> as:user:
+                - inject player_verification
+                - define player_list:->:<[user]>
             - define uuid_list <yaml[teleport_requests].read[].filter[values.contains[<player.uuid>]].parse[keys.first].filter_tag[<[player_arg].parse[uuid].contains[<[filter_value]>]>]>
             - define uuid_here_list <yaml[teleporthere_requests].read[<player.uuid>].values.filter_tag[<[player_arg].parse[uuid].contains[<[filter_value]>]>]||<list>>
             - if <[uuid_list].include[<[uuid_here_list]>].deduplicate.size> != <[player_arg].size>:
@@ -458,12 +452,9 @@ teleporthere_global_command:
                 - narrate "<&a>You have teleported all online players to you."
             - else if <[Args].first.contains[,]>:
                 - define player_arg <[Args].first>
-                - repeat <[player_arg].to_list.count[,].add[1]>:
-                    - if <server.match_player[<[player_arg].before[,]>]||null> == null || <server.match_player[<[player_arg].before[,]>].uuid> == <player.uuid>:
-                        - define Reason "One of the specified players is invalid."
-                        - inject Command_Error
-                    - define player_list:->:<server.match_player[<[player_arg].before[,]>]>
-                    - define player_arg <[player_arg].after[,]>
+                - foreach <[player_arg].split[,]> as:user:
+                    - inject player_verification
+                    - define player_list:->:<[user]>
                 - if <player.has_permission[adriftus.staff]>:
                     - teleport <[player_list]> <player.location.left[<util.random.decimal[-0.01].to[0.01]>]>
                     - narrate "<player.display_name><&a> has teleported you to them." targets:<[player_list]>
@@ -491,12 +482,9 @@ teleporthere_global_command:
                 - run everyone_teleporthere_request def:<player>
             - else if <[Args].first.contains[,]>:
                 - define player_arg <[Args].first>
-                - repeat <[player_arg].to_list.count[,].add[1]>:
-                    - if <server.match_player[<[player_arg].before[,]>]||null> == null || <server.match_player[<[player_arg].before[,]>].uuid> == <player.uuid>:
-                        - define Reason "One of the specified players is invalid."
-                        - inject Command_Error
-                    - define player_list:->:<server.match_player[<[player_arg].before[,]>]>
-                    - define player_arg <[player_arg].after[,]>
+                - foreach <[player_arg].split[,]> as:user:
+                    - inject player_verification
+                    - define player_list:->:<[user]>
                 - run multiple_teleporthere_request def:<[player_list]>|<player>
             - else:
                 - define player_1 <server.match_player[<[Args].first>]||null>
