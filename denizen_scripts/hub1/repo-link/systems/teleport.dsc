@@ -365,7 +365,7 @@ teleport_accept_global_command:
         - if <entry[player_1_map].result.is_empty>:
             - define Reason "The specified player is invalid."
             - inject Command_Error
-        - bungeerun hub1 networkteleport_request def:<entry[player_1_map].result.first>|<player>|<bungee.server>
+        - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_1_map].result.first>].include[<player>|<bungee.server>]>
 
 networkteleport_timeout_accept:
     type: task
