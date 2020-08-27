@@ -400,9 +400,10 @@ networkteleporthere_timeout_accept:
         - define Timeout <util.time_now.add[1m]>
         - waituntil rate:2s <[attached_player].is_online> || <[Timeout].duration_since[<util.time_now>].in_seconds> != 0
         - if <[attached_player].is_online.not>:
-            - adjust <queue> linked_player:<[attached_player]>
-            - define Reason "Timeout error."
-            - inject Command_Error
+            - bungee <[attached_server]>:
+                - adjust <queue> linked_player:<[attached_player]>
+                - define Reason "Timeout error."
+                - inject Command_Error
     - teleport <[attached_player]> <player[<[player_1_map].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
     - narrate "<&a>You have accepted <player[<[player_1_map].get[uuid]>].display_name><&a>'s teleport request!" targets:<[attached_player]>
     - narrate "<[attached_player].display_name><&a> has accepted your teleport request!" targets:<player[<[player_1_map].get[uuid]>]>
@@ -415,7 +416,7 @@ networkteleport_accept:
         - yaml set id:networkteleport_requests <[player_1_map].get[uuid]>:<-:<[attached_player].uuid>
         - bungeerun <[attached_server]> networkteleport_timeout_accept def:<[player_1_map]>|<[attached_player]>|<[attached_server]>
     - else if <yaml[networkteleporthere_requests].contains[<[attached_player].uuid>]> && <yaml[networkteleporthere_requests].read[<[attached_player].uuid>].contains[<[player_1_map].get[uuid]>]>:
-        - yaml set id:networkteleporther_requests <[attached_player].uuid>:<-:<[player_1_map].get[uuid]>
+        - yaml set id:networkteleporthere_requests <[attached_player].uuid>:<-:<[player_1_map].get[uuid]>
         - bungeerun <[player_1_map].get[server]> networkteleporthere_timeout_accept def:<[player_1_map]>|<[attached_player]>|<[attached_server]>
     - else:
         - bungee <[attached_server]>:
