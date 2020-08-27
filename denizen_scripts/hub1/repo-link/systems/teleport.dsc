@@ -62,6 +62,7 @@ teleport_cancel_global_command:
         # % ██ [  Syntax Check (Arg Count)  ] ██
         - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
+        - bungeerun hub1 networkteleport_cancel def:<context.args.first>|<player>|<bungee.server>|<player.display_name>
 
 networkteleport_cancel:
     type: task
