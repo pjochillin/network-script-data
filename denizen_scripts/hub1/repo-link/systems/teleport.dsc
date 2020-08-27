@@ -712,7 +712,7 @@ teleport_global_command:
                     - inject Command_Error
                 - define player_map_1 <entry[player_map_1].result.first>
                 - define player_map_2 <entry[player_map_2].result.first>
-                - bungeerun <[player_map_2].get[server]> networkteleport_send_timeout_check def:<[player_map_1]>|<[player_map_2]>|<player>|<bungee.server>|<player.display_name>
+                - bungeerun <[player_map_2].get[server]> networkteleport_send_timeout_check def:<list_single[<[player_map_1]>].include_single[<[player_map_2]>].include[<player>|<bungee.server>|<player.display_name>]>
         # % ██ [  Three Arguments  ] ██
         - else if <[Arg].size> == 3:
             - if <list[everyone|all].contains[<context.args.first>]>:
