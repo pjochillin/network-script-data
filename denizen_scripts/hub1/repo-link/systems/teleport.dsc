@@ -460,7 +460,7 @@ teleporthere_global_command:
                     - narrate "<player.display_name><&a> has teleported you to them." targets:<[player_list]>
                     - narrate "<&a>You have teleported the specified players to you."
                 - else:
-                    - run multiple_teleporthere_request def:<[player_list]>|<player>
+                    - run multiple_teleporthere_request def:<list_single[<[player_list]>].include[<player>]>
             - else:
                 - define player_2 <server.match_player[<[Args].first>]||null>
                 - if <[player_2]> == null || <[player_2].uuid> == <player.uuid>:
