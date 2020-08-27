@@ -524,7 +524,7 @@ teleporthere_global_command:
                     - inject Command_Error
                 - define player_map_2 <entry[player_map_2].result.first>
                 - if <player.has_permission[adriftus.staff].not>:
-                    - bungeerun hub1 networkteleporthere_request def:<[player_map_2]>|<entry[player_map_1].result.first>
+                    - bungeerun hub1 networkteleporthere_request def:<list_single[<[player_map_2]>].include_single[<entry[player_map_1].result.first>]>
                 - else:
                     - if <[player_map_2].get[server]> != <bungee.server>:
                         - define server <bungee.server>
