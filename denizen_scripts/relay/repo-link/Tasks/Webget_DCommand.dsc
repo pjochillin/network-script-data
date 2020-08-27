@@ -151,19 +151,19 @@ Webget_DCommand:
       - ~webget <[URL]> data:<[Data]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> != invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> != invalid:
-      - ~webget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~betterwebget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> != invalid  && <[Headers]||invalid> == invalid && <[Method]||invalid> != invalid:
-      - ~webget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~betterwebget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> == invalid && <[Method]||invalid> != invalid:
-      - ~webget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~betterwebget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> == invalid:
       - ~webget <[URL]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> != invalid:
-      - ~webget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~betterwebget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
   # % ██ [ Listener Flags                          ] ██
     - if <[Args].contains_any[-f|-fail|-failed]>:
@@ -181,9 +181,9 @@ Webget_DCommand:
     - if <[Args].contains_any[-h|-head|-headers]>:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Result Headers**: `<entry[Response].result_headers.formatted||Invalid Save Entry>`]>"
 
-    - if !<[Args].filter_tag[before[:].contains_any[e:/ext:/extension:/extensions:]].is_empty>:
+    - if !<[Args].filter_tag[<list[e|ext|extension|extensions].contains[<[filter_value].before[:]>]>].is_empty>:
       - if <[Args].contains_any[-r|-result|-results|-l|-log|-logs]>:
-        - define Extension <[Args].filter[before[:].contains_any[e:/ext:/extension:/extensions:]].first.after[:]>
+        - define Extension <[Args].filter_tag[<list[e|ext|extension|extensions].contains[<[filter_value].before[:]>]>].first.after[:]>
         - if !<[Extension].starts_with[.]>:
           - define Extension .<[Extension]>
         - if <[Extension].contains_any[.exe|.jar|.bin|.csh|.ksh|.out|.run|.js|.com|.cmd|.bat|.sh]>:
