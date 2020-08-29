@@ -59,7 +59,7 @@ teleport_cancel_global_command:
         # % ██ [  Syntax Check (Arg Count)  ] ██
         - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
-        - bungeerun hub1 networkteleport_cancel def:<list_single[context.args.first>].include[<player>|<bungee.server>|<player.display_name>]>
+        - bungeerun hub1 networkteleport_cancel def:<list_single[<context.args.first>].include[<player>|<bungee.server>|<player.display_name>]>
 
 networkteleport_cancel:
     type: task
@@ -581,6 +581,20 @@ teleport_global_command:
     - define Arg2 <server.online_players.parse[name]>
     - inject MultiArg_Command_Tabcomplete
     script:
+    # % ██ [  Inject Teleport Script  ] ██
+    - inject teleport_global_command_inject
+
+teleport_global_handler:
+    type: world
+    events:
+        on teleport|tp|minecraft&coteleport|minecraft&cotp command:
+        - determine passively FULFILLED
+        # % ██ [  Inject Teleport Script  ] ██
+        - inject teleport_global_command_inject
+
+teleport_global_command_inject:
+    type: task
+    script:
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
@@ -595,10 +609,11 @@ teleport_global_command:
                 - inject Command_Error
             - if <player.has_permission[adriftus.staff]>:
                 - teleport <[player_2].location.left[<util.random.decimal[-0.01].to[0.01]>]>
-                - narrate "<&a>You have teleported to <[player_2].display_name>."
+                - narrate "<&a>You have teleported to <[player_2].display_name><&a>."
                 - narrate "<player.display_name><&a> has teleported to you." targets:<[player_2]>
             - else:
                 - run teleport_request def:<player>|<[player_2]>|<player>
+            - stop
         # % ██ [  Staff-Only Check  ] ██
         - if <player.has_permission[adrifuts.staff].not>:
             - define Reason "You can only teleport to a player."
@@ -679,6 +694,7 @@ teleport_global_command:
                     - teleport <player[<[player_map_2].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
                     - narrate "<&5>You have teleported to <player[<[player_map_2].get[uuid]>].display_name><&a>."
                     - narrate "<&5><player.display_name> has teleported themself to you." targets:<player[<[player_map_2].get[uuid]>]>
+            - stop
         # % ██ [  Staff-Only Check  ] ██
         - if <player.has_permission[adrifuts.staff].not>:
             - define Reason "You can only teleport to a player."
