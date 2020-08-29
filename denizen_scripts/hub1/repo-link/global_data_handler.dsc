@@ -112,25 +112,6 @@ External_Player_Data_Join_Event:
       - else:
         - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
 
-Error_Handler_PlayerData:
-  type: task
-  debug: true
-  Record:
-    - debug record start
-  script:
-    - foreach Name|UUID|Server as:Tag:
-      - if <[Tag]||invalid> == invalid || <[Tag]> == null:
-        - foreach next
-      - define WeirdList:->:<[Tag]>
-    - if <[WeirdList]||invalid> == invalid:
-      - stop
-    - foreach <[WeirdList]> as:Tag:
-      - define "Context:->:`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`"
-    - ~debug record submit save:mylog
-    - define Link "<entry[mylog].submitted||DEBUG FAILED>"
-    - define Text "<&lt>@!626086306606350366<&gt> <&lt>a:blueweewoo:725197352645689435<&gt> I'm alerting you about the script setup for debugging a Bungee Event issue:<&nl> <[Link]><&nl><[Context].separated_by[<&nl>]>"
-    - bungeerun Relay Simple_Discord_Embed def:<list_single[<[Text]>].include[631492353059717131]>
-
 #@modify_global_player_data_safe:
 #@  type: task
 #@  definitions: uuid|node|value
