@@ -32,12 +32,14 @@ global_data_handler:
       - define Name <context.name>
       - define UUID <context.uuid>
       - define Server <context.server>
-      - define Old_Server <yaml[data_handler].read[players.<[UUID]>.server]>
+      - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
+        - define Old_Server <yaml[data_handler].read[players.<[UUID]>.server]>
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>].with[Server].as[<[Server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Track Player ] ██
-      - yaml id:data_handler set servers.<[Old_Server]>:<-:<[UUID]>
+      - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
+        - yaml id:data_handler set servers.<[Old_Server]>:<-:<[UUID]>
       - yaml id:data_handler set players.<[UUID]>.name:<[name]>
       - yaml id:data_handler set players.<[UUID]>.server:<[server]>
       - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
