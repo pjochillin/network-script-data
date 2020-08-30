@@ -542,7 +542,7 @@ teleporthere_global_command:
         - else if <player.has_permission[adrifuts.staff].not>:
             - define Reason "You can only teleport to a player."
             - inject Permission_Error
-        # % ██ [  Two Arguments wtih Request  ] ██
+        # % ██ [  Two Arguments with Request  ] ██
         - else:
             - if <list[everyone|all].contains[<context.args.first>]>:
                 - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_2
