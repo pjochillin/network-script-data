@@ -127,3 +127,19 @@ External_Player_Data_Join_Event:
 #^      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
 #^      - yaml id:global.player.<[uuid]> savefile:data/players/<[uuid]>.yml
 #^      - yaml id:global.player.<[uuid]> unload
+
+# % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's name ] ██
+# % ██  [ Returns 'null' if the player name is invalid (or not online) ] ██
+# - ██  [ Usage ]  Retrieves the player's information (in map form) from 'hub1' and stores it in <entry[player_map].result>.
+# - ██  [       ]  - ~bungeetag server:hub1 <proc[player_info_map].context[<[player_input]>]> save:player_map
+# - ██  [       ]  Retrieves the player's infortmation (in map form) and stores it in the `player_map` definition. (only works on 'hub1')
+# - ██  [       ]  - define player_map <proc[player_info_map].context[<[player_input]>]>
+
+player_info_map:
+    type: procedure
+    definitions: input
+    script:
+    - define Player_Map <yaml[data_handler].read[players].filter_tag[<[filter_value].get[name].is[==].to[<[input]>]>]||null>
+    - if <[Player_Map]> == null:
+        - determine null
+    - determine <map.with[uuid].as[<[Player_Map].keys.first>].include[<[Player_Map].values.first>]>
