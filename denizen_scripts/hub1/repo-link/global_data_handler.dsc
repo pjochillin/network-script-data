@@ -143,7 +143,7 @@ player_info_map:
     definitions: input
     script:
     - if <yaml[data_handler].contains[players.<[input]>]>:
-      - determine <map.include[<yaml[data_handler].read[players.<[input]>]>
+      - determine <yaml[data_handler].read[players.<[input]>].with[name].as[<[input]>]>
     - determine null
     
 # % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
