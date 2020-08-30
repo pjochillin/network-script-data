@@ -140,6 +140,6 @@ player_info_map:
     definitions: input
     script:
     - define Player_Map <yaml[data_handler].read[players].filter_tag[<[filter_value].get[name].is[==].to[<[input]>]>]||null>
-    - if <[Player_Map]> == null:
+    - if <[Player_Map]> == null || <[Player_Map].is_empty>:
         - determine null
     - determine <map.with[uuid].as[<[Player_Map].keys.first>].include[<[Player_Map].values.first>]>
