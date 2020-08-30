@@ -43,6 +43,8 @@ global_data_handler:
       - yaml id:data_handler set players.<[UUID]>.name:<[name]>
       - yaml id:data_handler set players.<[UUID]>.server:<[server]>
       - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
+      - yaml id:data_handler set players.<[name]>.UUID:<[UUID]>
+      - yaml id:data_handler set players.<[name]>.server:<[server]>
 
 
     # % ██ [ Fire Player Login Events ] ██
@@ -65,6 +67,7 @@ global_data_handler:
     # % ██ [ Remove Player Data ] ██
       - yaml id:data_handler set players.<[UUID]>:!
       - yaml id:data_handler set servers.<[server]>:<-:<[UUID]>
+      - yaml id:data_handler set players.<[Name]>:!
 
       - yaml id:data_handler set network.names:<-:<[Name]>
       - yaml id:data_handler set network.uuids:<-:<[UUID]>
