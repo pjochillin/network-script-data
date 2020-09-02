@@ -426,6 +426,7 @@ teleporthere_global_command:
     name: teleporthere
     usage: /teleporthere (<&lt>Player<&gt>(,...)/(everyone/all)) (-r/-request/request) (-l/-local/-locally/-s/-server)
     aliases:
+    - tphere
     - ntph
     - tph
     - networktphere
